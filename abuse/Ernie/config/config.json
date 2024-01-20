@@ -1,0 +1,8 @@
+{
+  "client_id": "Dftts9fQmPlW473XGbVvRBMC",
+  "client_secret": "Q579iTQ7zNMDmnEPnN5GZKGq2qRtshQd",
+  "grant_type": "client_credentials",
+  "url_getToken": "https://aip.baidubce.com/oauth/2.0/token?client_id={client_id}&client_secret={client_secret}&grant_type={grant_type}",
+  "url_ERNIE_Bot_4": "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=",
+  "url_XuanYuan_70B": "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/xuanyuan_70b_chat?access_token="
+}
