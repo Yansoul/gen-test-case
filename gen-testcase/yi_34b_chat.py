@@ -24,7 +24,7 @@ def get_yi_url():
 
 
 LLM_URL_BASE = get_yi_url()
-print(LLM_URL_BASE)
+# print(LLM_URL_BASE)
 
 YI_34B = QianfanChatEndpoint(
     model="Yi-34B-Chat",
