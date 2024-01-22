@@ -7,8 +7,8 @@ from pydantic import BaseModel, Field
 
 # 输出模板
 class TestPoint(BaseModel):
-    category: str = Field(description="测试点所属的维度")
-    content: str = Field(description="测试点的内容")
+    field: str = Field(description="测试点所属的字段")
+    test_point: str = Field(description="测试验证点")
 
 
 class TestPointSet(BaseModel):

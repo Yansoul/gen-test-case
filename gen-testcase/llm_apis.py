@@ -42,17 +42,22 @@ def get_test_points(api_def):
     llm_chain = LLMChain(prompt=prompt, llm=llm)
     resp = llm_chain.invoke(api_def)
     resp = resp["text"]
+    print("origin: \n" + resp)
 
     # 解决一些格式问题
-    resp = resp.replace("\"，", "\",")
+    # resp = resp.replace("\"，", "\",")
+    result = re.search(r'```json(.*?)```', resp, re.DOTALL)
+    resp = result.group(1)
+    print("format: \n" + resp)
 
     # 将测试点解析为JSON
     test_point_parser = PydanticOutputParser(pydantic_object=TestPointSet)
     test_points = test_point_parser.parse(resp)
     test_points = json.loads(test_points.json())
 
-    test_points["code"] = 0
-    test_points["msg"] = f"成功提取{len(test_points['test_points'])}个测试点"
+    print("final: \n" + json.dumps(test_points,
+                                   ensure_ascii=False,
+                                   indent=4))
 
     return test_points
 

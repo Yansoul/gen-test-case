@@ -23,28 +23,20 @@ def button_test_point(api_def):
     :param api_def:
     :return:
     """
-    # print(f"api_def: \n{api_def}")
-    # return llm_apis.try_again_if_failed(llm_apis.get_test_points(api_def))
-    array_points = [
-        ["custNbr", "必填校验"],
-        ["custNbr", "长度校验"],
-        ["crdAcNbr", "必填校验"],
-        ["crdAcNbr", "长度校验"],
-        ["crdAcType", "必填校验"],
-        ["crdAcType", "长度校验"],
-        ["crdAcType", "码值校验"],
-        ["idType", "必填校验"],
-        ["idType", "长度校验"],
-        ["idType", "码值校验"],
-        ["idNbr", "必填校验"],
-        ["idNbr", "长度校验"],
-        ["ownBrorg", "必填校验"],
-        ["ownBrorg", "长度校验"],
-        ["pageSize", "必填校验"],
-        ["pageSize", "长度校验"],
-        ["currentPage", "必填校验"],
-        ["currentPage", "长度校验"]
-    ]
+    array_points = []
+
+    json_test_points = llm_apis.try_again_if_failed(llm_apis.get_test_points,
+                                                    api_def)
+
+    # 检查返回数据
+    json_data = json.dumps(json_test_points,
+                           ensure_ascii=False,
+                           indent=4)
+    print("web_ui_data: \n")
+    print(json_data)
+
+    json_test_points = json_test_points["test_points"]
+    array_points.extend([[case["field"], case["test_point"]] for case in json_test_points])
     return array_points
 
 
@@ -55,22 +47,21 @@ def button_test_cases(api_def, test_points):
     :param test_points:
     :return:
     """
-    # test_cases = [
-    #     ["custNbr 字段上送正确的值，验证常规性校验", "正例", "客户号填写，卡账号和证件号未填写", "校验正确，响应代码正确：ReplyCd: 000000, 提示信息正确： ReplyText: 操作成功"],
-    #     ["custNbr 字段未上送值，验证必填项校验", "反例", "客户号未填写，卡账号和证件号也未填写", "查询失败，提示信息合理"],
-    #     ["custNbr 字段上送长度为 17 的值，验证长度校验", "正例", "输入一个长度为 17 的字符串作为 custNbr 字段值", "校验正确，响应代码正确：ReplyCd: 000000, 提示信息正确： ReplyText: 操作成功"],
-    #     ["custNbr 字段上送长度不为 17 的值，验证长度校验", "反例", "输入一个长度不为 17 的字符串作为 custNbr 字段值", "查询失败，提示信息合理"]
-    # ]
     test_cases = []
 
     for row in test_points.itertuples():
         field = getattr(row, "字段")
         test_point = getattr(row, "验证点")
         print("field = " + field + "    test_point = " + test_point)
-        json_test_cases = llm_apis.try_again_if_failed(llm_apis.get_test_cases, api_def, field, test_point)
+        json_test_cases = llm_apis.try_again_if_failed(llm_apis.get_test_cases,
+                                                       api_def,
+                                                       field,
+                                                       test_point)
 
         # 检查返回数据
-        json_data = json.dumps(json_test_cases, ensure_ascii=False, indent=4)
+        json_data = json.dumps(json_test_cases,
+                               ensure_ascii=False,
+                               indent=4)
         print("web_ui_data:\n")
         print(json_data)
 
@@ -129,3 +120,4 @@ with gr.Blocks(theme=gr.themes.Soft()) as interface:
 
 # 运行接口
 interface.launch()
+
