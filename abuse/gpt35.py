@@ -2,7 +2,7 @@ import gradio as gr
 import openai
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key='sk-')
 
 
 async def analyze_documentation(documentation):
