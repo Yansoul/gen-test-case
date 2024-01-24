@@ -2,7 +2,7 @@
 import Test
 
 # 大模型的URL前缀
-LLM_URL_BASE = "http://10.34.21.33:8080/v1"
+LLM_URL_BASE = ""
 
 # 是否是测试状态
 TEST = Test.TEST
