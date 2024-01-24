@@ -4,7 +4,7 @@ import json
 
 def do_request(prompt):
     url = "https://api.baichuan-ai.com/v1/chat/completions"
-    api_key = "sk-e5e338e255c747133853259b46b45d76"
+    api_key = "sk-"
 
     data = {
         "model": "Baichuan2-Turbo",
