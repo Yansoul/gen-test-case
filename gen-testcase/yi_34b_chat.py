@@ -4,8 +4,8 @@ from langchain_openai import ChatOpenAI
 from langchain_community.chat_models import QianfanChatEndpoint
 from langchain_core.messages import HumanMessage
 
-API_KEY = "Dftts9fQmPlW473XGbVvRBMC"
-SECRET_KEY = "Q579iTQ7zNMDmnEPnN5GZKGq2qRtshQd"
+API_KEY = ""
+SECRET_KEY = ""
 url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/yi_34b_chat?access_token="
 
 
